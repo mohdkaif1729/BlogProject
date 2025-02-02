@@ -1,9 +1,9 @@
 import React, {useId} from 'react'
 
 function Select({
-    options,
+    options = [],
     label,
-    className,
+    className = "",
     ...props
 }, ref) {
     const id = useId()

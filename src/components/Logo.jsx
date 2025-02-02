@@ -1,8 +1,10 @@
-import React from 'react'
+import LogoImg from "../assets/LogoImg.webp"
 
-function Logo({width = '100px'}) {
+function Logo() {
   return (
-    <div>Logo</div>
+    <div>
+      <img src={LogoImg} alt="" className={`h-10`} />
+    </div>
   )
 }
 
