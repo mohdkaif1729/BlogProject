@@ -1,8 +1,13 @@
-import { Login as loginComponent } from '../components'
+import { useEffect } from 'react';
+import LoginComponent from '../components/Login'
+
 function Login() {
+  useEffect(() => {
+      document.title = "Login"
+    }, []);
   return (
     <div className='py-8'>
-        <loginComponent />
+        <LoginComponent />
     </div>
   )
 }

@@ -1,6 +1,11 @@
-import { Signup as SignupComponent } from '../components'
+import { useEffect } from 'react';
+import { Signup as SignupComponent } from '../components';
+
 
 function Signup() {
+  useEffect(() => {
+        document.title = "Signup"
+      }, []);
   return (
     <div className='py-8'>
         <SignupComponent />
