@@ -10,12 +10,15 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      console.log("login of store run");
       state.status = true;
-      state.userData = action.payload.userData;
+      if(!(action.payload.userData)){
+        state.userData = action.payload;
+      }
+      else{
+        state.userData = action.payload.userData;
+      }
     },
     logout: (state) => {
-      console.log("logout of store run");
       state.status = false;
       state.userData = null;
     },

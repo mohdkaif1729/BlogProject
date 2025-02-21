@@ -6,7 +6,6 @@ export class AuthService {
   account;
 
   constructor() {
-    console.log("AuthService is run");
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
@@ -14,12 +13,7 @@ export class AuthService {
   }
 
   async createAccount({ email, password, name }) {
-    try {
-      console.log("createAccount fun of authservice is run");
-      console.log(email);
-      console.log(password);
-      console.log(name);
-
+    // try {
       const userAccount = await this.account.create(
         ID.unique(),
         email,
@@ -32,22 +26,20 @@ export class AuthService {
       } else {
         return userAccount;
       }
-    } catch (error) {
-      throw error;
-    }
+    // } catch (error) {
+    //   throw error;
+    // }
   }
 
   async login({ email, password }) {
-    console.log("login fun of authservice is run");
-    try {
+    // try {
       return await this.account.createEmailSession(email, password);
-    } catch (error) {
-      throw error;
-    }
+    // } catch (error) {
+    //   throw error;
+    // }
   }
 
   async getCurrentUser() {
-    console.log("getCurrentUser fun of authservice is run");
     try {
       return await this.account.get();
     } catch (error) {
@@ -58,7 +50,6 @@ export class AuthService {
   }
 
   async logout() {
-    console.log("logout fun of authservice is run");
     try {
       await this.account.deleteSessions();
     } catch (error) {

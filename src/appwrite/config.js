@@ -7,7 +7,6 @@ export class Service {
   bucket;
 
   constructor() {
-    console.log("config constructor is run");
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
@@ -16,7 +15,6 @@ export class Service {
   }
 
   async createPost({ title, slug, content, featuredImage, status, userId }) {
-    console.log("createPost fun of service is run");
     try {
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
@@ -36,7 +34,6 @@ export class Service {
   }
 
   async updatePost(slug, { title, content, featuredImage, status }) {
-    console.log("updatePost fun of service is run");
     try {
       return await this.databases.updateDocument(
         conf.appwriteDatabaseId,
@@ -55,7 +52,6 @@ export class Service {
   }
 
   async deletePost(slug) {
-    console.log("deletePost fun of service is run");
     try {
       await this.databases.deleteDocument(
         conf.appwriteDatabaseId,
@@ -70,7 +66,6 @@ export class Service {
   }
 
   async getPost(slug) {
-    console.log("getPost fun of service is run");
     try {
       return await this.databases.getDocument(
         conf.appwriteDatabaseId,
@@ -83,13 +78,14 @@ export class Service {
     }
   }
 
-  async getPosts(queries = [Query.equal("status", "active")]) {
-    console.log("getPosts fun of service is run");
+  async getPosts(userId) {
     try {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        queries
+        [
+          Query.equal("userId", userId)
+        ]
       );
     } catch (error) {
       console.log("Appwrite serive :: getPosts :: error", error);
@@ -100,7 +96,6 @@ export class Service {
   // file upload service
 
   async uploadFile(file) {
-    console.log("uploadFile fun of service is run");
     try {
       return await this.bucket.createFile(
         conf.appwriteBucketId,
@@ -114,7 +109,6 @@ export class Service {
   }
 
   async deleteFile(fileId) {
-    console.log("deleteFile fun of service is run");
     try {
       await this.bucket.deleteFile(conf.appwriteBucketId, fileId);
       return true;
@@ -125,7 +119,6 @@ export class Service {
   }
 
   getFilePreview(fileId) {
-    console.log("getFilePreview fun of service is run");
     return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
   }
 }
