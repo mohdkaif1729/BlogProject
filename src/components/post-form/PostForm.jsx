@@ -105,7 +105,7 @@ export default function PostForm({ post }) {
                         <img
                             src={appwriteService.getFilePreview(post.featuredImage)}
                             alt={post.title}
-                            className="rounded-lg"
+                            className="rounded-lg h-[500px] w-full object-cover"
                         />
                     </div>
                 )}
