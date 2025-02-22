@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react'
 import appwriteService from "../appwrite/config";
-import {Container, PostCard} from '../components'
+import {Container, MobileNavBar, PostCard } from '../components'
 import { useSelector } from 'react-redux';
+
 
 function Home() {
     const [posts, setPosts] = useState([]);

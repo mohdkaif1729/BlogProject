@@ -1,9 +1,9 @@
-import {Container, Logo, LogoutBtn} from '../index'
+import {Container, Logo, LogoutBtn} from '../components'
 import { Link, NavLink } from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-function Header() {
+function MobileNavBar({isSideBar}) {
   const authStatus = useSelector((state) => state.auth.status)
   const navigate = useNavigate()
 
@@ -37,22 +37,21 @@ function Header() {
 
 
   return (
-    <header className='py-2 tablet:py-3 shadow bg-slate-800'>
       <Container>
-        <nav className='flex tablet:flex-row tablet:justify-between'>
-          <div>
+        <nav className={`flex flex-col absolute bg-slate-800 w-[80%] h-screen top-0 left-0 z-10 tablet:hidden gap-y-20 p-4 transition duration-200 ${isSideBar ? '-translate-x-0' : '-translate-x-full' }`}>
+          <div className='flex justify-center'>
             <Link to='/'>
               <Logo/>
               </Link>
           </div>
-          <ul className='flex gap-x-2 max-tablet:w-full max-tablet:justify-between items-center'>
+          <ul className='flex flex-col gap-y-10'>
             {navItems.map((item) => 
             item.active ? (
               
               <li key={item.name}>
                 <NavLink
                   to={item.slug}
-                  className={({isActive}) => `${isActive ? 'bg-blue-100 text-black ' : 'text-white '} inline-bock px-6 py-2 duration-200  hover:bg-blue-100 hover:text-black rounded-full hidden tablet:block text-center`}
+                  className={({isActive}) => `${isActive ? 'bg-blue-100 text-black ' : 'text-white '} inline-bock px-6 py-2 duration-200  hover:bg-blue-100 hover:text-black rounded-full text-center`}
                 >
                 {item.name}
               </NavLink>
@@ -60,16 +59,14 @@ function Header() {
             ) : null
             )}
             {authStatus && (
-              <li className='hidden tablet:block'>
+              <li>
                 <LogoutBtn />
               </li>
             )}
-            
           </ul>
         </nav>
         </Container>
-    </header>
   )
 }
 
-export default Header
+export default MobileNavBar
