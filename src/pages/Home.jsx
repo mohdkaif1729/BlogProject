@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react'
 import appwriteService from "../appwrite/config";
-import {Container, MobileNavBar, PostCard } from '../components'
+import {Container, PostCard } from '../components'
 import { useSelector } from 'react-redux';
+import  EmptyPost  from "../assets/EmptyPost.png"
 
 
 function Home() {
@@ -44,12 +45,9 @@ function Home() {
         return (
             <div className="w-full py-8 mt-4 text-center">
                 <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold text-white">
-                                No post yet
-                            </h1>
-                        </div>
+                    <div className="flex flex-col flex-wrap items-center gap-y-4">
+                        <img src={EmptyPost} alt="" className='h-[200px] w-[200px]' />
+                        <p className='text-xl text-white font-bold'>Empty</p>
                     </div>
                 </Container>
             </div>
