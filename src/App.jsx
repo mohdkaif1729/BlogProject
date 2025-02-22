@@ -5,6 +5,7 @@ import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
 import { Footer, Header, MobileNavBar } from "./components";
 import { Outlet } from "react-router-dom";
+import { ColorRing } from "react-loader-spinner";
 
 function App() {
 	const [loading, setLoading] = useState(true);
@@ -41,7 +42,18 @@ function App() {
 				</div>
         			<Footer />
 			</div>
-	) : <p>loading...</p>;
+	) : 
+	<div className="flex justify-center">
+		<ColorRing
+			visible={true}
+			height="200"
+			width="200"
+			ariaLabel="color-ring-loading"
+			wrapperStyle={{}}
+			wrapperClass="color-ring-wrapper"
+			colors={['#1e293b', '#334155']}
+		/>
+	</div>;
 }
 
 export default App;

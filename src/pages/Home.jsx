@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import appwriteService from "../appwrite/config";
 import {Container, PostCard } from '../components'
 import { useSelector } from 'react-redux';
-import  EmptyPost  from "../assets/EmptyPost.png"
+import EmptyPost  from "../assets/EmptyPost.png"
 
 
 function Home() {
