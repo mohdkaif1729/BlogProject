@@ -4,7 +4,6 @@ import { Container, PostForm } from '../components'
 
 
 function AddPost() {
-  console.log('IN ADD POST: ')
    useEffect(() => {
       document.title = "Add Post"
     }, []);

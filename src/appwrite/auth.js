@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   async createAccount({ email, password, name }) {
-    // try {
+    try {
       const userAccount = await this.account.create(
         ID.unique(),
         email,
@@ -26,17 +26,17 @@ export class AuthService {
       } else {
         return userAccount;
       }
-    // } catch (error) {
-    //   throw error;
-    // }
+    } catch (error) {
+      throw error;
+    }
   }
 
   async login({ email, password }) {
-    // try {
+    try {
       return await this.account.createEmailSession(email, password);
-    // } catch (error) {
-    //   throw error;
-    // }
+    } catch (error) {
+      throw error;
+    }
   }
 
   async getCurrentUser() {

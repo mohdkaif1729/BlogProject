@@ -9,9 +9,6 @@ function PostCard({ $id, title, featuredImage }) {
   const completeDate = createAt.toDateString();
   const titleIsGreaterThan50Char = title.substring(0, 25);
   const lengthOfTitle = title.length;
-  console.log('tile', typeof title)
-  console.log('titleisgreater', titleIsGreaterThan50Char);
-  console.log('lenght', lengthOfTitle)
 
   return (
     <Link to={`/post/${$id}`}>
