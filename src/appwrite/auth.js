@@ -51,7 +51,7 @@ export class AuthService {
 
   async logout() {
     try {
-      await this.account.deleteSessions();
+      await this.account.deleteSessions();  
     } catch (error) {
       console.log("Appwrite serive :: logout :: error", error);
     }

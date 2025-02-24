@@ -1,6 +1,8 @@
 import {useDispatch} from 'react-redux'
 import authService from '../../appwrite/auth'
 import {logout} from '../../store/authSlice'
+import  Swal  from "sweetalert2";
+
 
 function LogoutBtn() {
     const dispatch = useDispatch()
@@ -8,6 +10,11 @@ function LogoutBtn() {
         authService.logout().then(() => {
             dispatch(logout())
         })
+        Swal.fire({
+          title: "Logout Successfully",
+          icon: "success",
+          draggable: true
+        });
     }
   return (
     <button

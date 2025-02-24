@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
 import { Footer, Header, MobileNavBar } from "./components";
 import { Outlet } from "react-router-dom";
 import { ColorRing } from "react-loader-spinner";
+// import { setSideBar } from "./store/sideBarSlice"
+
 
 function App() {
 	const [loading, setLoading] = useState(true);
-	const [isSideBar, setIsSideBar] = useState(false);
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
+	// const handleSideBar = () => {
+	// 	dispatch(setSideBar());
+	// }
+	
 	useEffect(() => {
 		authService
 			.getCurrentUser()
@@ -32,11 +36,11 @@ function App() {
 					<Header />
 					<main className="grow">
 						<li className="block tablet:hidden">
-							<button onClick={() => setIsSideBar((prev) => !prev)} className=' text-2xl text-white absolute top-3 right-3'>
+							{/* <button onClick={handleSideBar} className=' text-2xl text-white absolute top-3 right-3'>
 								&#9776;
-							</button>
+							</button> */}
 						</li>
-						<MobileNavBar isSideBar={isSideBar} />
+						<MobileNavBar/>
 						<Outlet />
 					</main>
 				</div>
@@ -51,7 +55,7 @@ function App() {
 			ariaLabel="color-ring-loading"
 			wrapperStyle={{}}
 			wrapperClass="color-ring-wrapper"
-			colors={['#1e293b', '#334155']}
+			colors={['#000000']}
 		/>
 	</div>;
 }
