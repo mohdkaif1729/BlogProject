@@ -8,7 +8,7 @@ import { ColorRing } from "react-loader-spinner";
 
 function Home() {
     const [posts, setPosts] = useState([]);
-    // const { userData: currentUser } = useSelector((state) => state?.auth);
+    const { userData: currentUser } = useSelector((state) => state?.auth);
     // console.log(currentUser)
     const { status } = useSelector((state) => state?.auth);
     const [loading, setLoading] = useState(true);
@@ -37,7 +37,7 @@ function Home() {
                 <div className="flex flex-wrap">
                     <div className="p-2 w-full">
                         <h1 className="text-2xl font-bold text-white">
-                            Login to read posts or Create account to create new post
+                            Login to read posts or Sign up to create posts
                         </h1>
                     </div>
                 </div>
@@ -78,6 +78,9 @@ function Home() {
     return (
         <div className='w-full py-8'>
             <Container>
+                {currentUser && <div className='mb-8'>
+                    <p className='text-xl text-white font-bold'>Hi, {currentUser.name}</p>
+                </div>}
                 <div className='flex flex-wrap justify-center'>
                     {posts.map((post) => (
                         <div key={post.$id} className='p-2 w-full mobile:w-[300px]'>
