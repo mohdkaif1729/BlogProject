@@ -10,7 +10,7 @@ import { ColorRing } from "react-loader-spinner";
 
 function App() {
 	const [loading, setLoading] = useState(true);
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	// const handleSideBar = () => {
 	// 	dispatch(setSideBar());

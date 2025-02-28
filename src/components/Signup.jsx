@@ -5,12 +5,13 @@ import { login } from "../store/authSlice";
 import { Button, Input, Logo } from "./index.js";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { ColorRing } from "react-loader-spinner";
 
 function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { isSubmitting } } = useForm();
 
   const create = async (data) => {
     setError("");
@@ -80,9 +81,23 @@ function Signup() {
                 required: true,
               })}
             />
-            <Button type="submit" className="w-full">
-              Create Account
-            </Button>
+            {
+              isSubmitting ? 
+              <div className="flex justify-center">
+                <ColorRing
+                  visible={true}
+                  height="20"
+                  width="20"
+                  ariaLabel="color-ring-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="color-ring-wrapper"
+                  colors={['#000000']}
+                />
+              </div> :
+              <Button disabled={isSubmitting} type="submit" className="w-full">
+                Create Account
+              </Button>
+            }
           </div>
         </form>
       </div>

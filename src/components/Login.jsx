@@ -5,6 +5,7 @@ import { Button, Input, Logo } from "./index";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 import { useForm } from "react-hook-form";
+import { ColorRing } from "react-loader-spinner";
 
 function Login() {
   const navigate = useNavigate();
@@ -74,9 +75,23 @@ function Login() {
                 required: true,
               })}
             />
-            <Button disabled={isSubmitting} type="submit" className="w-full">
-              Sign in
-            </Button>
+            {
+              isSubmitting ? 
+              <div className="flex justify-center">
+                <ColorRing
+                  visible={true}
+                  height="20"
+                  width="20"
+                  ariaLabel="color-ring-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="color-ring-wrapper"
+                  colors={['#000000']}
+                />
+              </div> :
+              <Button disabled={isSubmitting} type="submit" className="w-full">
+                Sign in
+              </Button>
+            }
           </div>
         </form>
       </div>

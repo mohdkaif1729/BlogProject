@@ -4,17 +4,17 @@ import { Button, Input, RTE, Select } from "..";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ColorRing } from "react-loader-spinner";
 
 export default function PostForm({ post }) {
     const { userData: currentUser } = useSelector((state) => state?.auth);
     console.log(currentUser)
-    const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
+    const { register, handleSubmit, watch, setValue, control, getValues, formState: { isSubmitting } } = useForm({
         defaultValues: {
             title: post?.title || "",
             slug: post?.$id || "",
             content: post?.content || "",
-            status: post?.status || "active",
-            name: "",
+            status: post?.status || "active"
         },
     });
 
@@ -33,6 +33,7 @@ export default function PostForm({ post }) {
                 ...data,
                 featuredImage: file ? file.$id : undefined,
             });
+            console.log('hgh')
 
             if (dbPost) {
                 navigate(`/`);
@@ -43,7 +44,7 @@ export default function PostForm({ post }) {
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
-                const dbPost = await appwriteService.createPost({ ...data, userId: userData?.$id });
+                const dbPost = await appwriteService.createPost({ ...data, userId: userData?.$id, name: currentUser.name });
 
                 if (dbPost) {
                     navigate(`/`);
@@ -116,9 +117,23 @@ export default function PostForm({ post }) {
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
-                    {post ? "Update" : "Submit"}
-                </Button>
+                {
+                    isSubmitting ? 
+                    <div className="flex justify-center">
+                        <ColorRing
+                        visible={true}
+                        height="20"
+                        width="20"
+                        ariaLabel="color-ring-loading"
+                        wrapperStyle={{}}
+                        wrapperClass="color-ring-wrapper"
+                        colors={['#000000']}
+                        />
+                    </div> :
+                    <Button disabled={isSubmitting} type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                        {post ? "Update" : "Submit"}
+                    </Button>
+                }
             </div>
         </form>
     );

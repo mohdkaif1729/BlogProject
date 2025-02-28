@@ -1,17 +1,20 @@
 import {useEffect, useState} from 'react'
 import appwriteService from "../appwrite/config";
 import {Container, PostCard } from '../components'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import EmptyPost  from "../assets/EmptyPost.png"
 import { ColorRing } from "react-loader-spinner";
+import authService from '../appwrite/auth';
+import { login } from '../store/authSlice';
 
 
 function Home() {
     const [posts, setPosts] = useState([]);
     const { userData: currentUser } = useSelector((state) => state?.auth);
-    // console.log(currentUser)
+    console.log('current user: ', currentUser)
     const { status } = useSelector((state) => state?.auth);
     const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
     console.log('all posts', posts);
     
     useEffect(() => {
@@ -19,6 +22,10 @@ function Home() {
         document.title = "Home"
 
         // const currentUserId = currentUser?.$id;
+        // const user = await authService.getCurrentUser();
+        // if(user){
+        //     dispatch(login(user));
+        // }
 
         appwriteService.getPosts().then((posts) => {
             if (posts) {

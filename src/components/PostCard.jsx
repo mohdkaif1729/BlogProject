@@ -16,7 +16,6 @@ function PostCard(
   const completeDate = createAt.toDateString();
   const titleIsGreaterThan50Char = title.substring(0, 25);
   const lengthOfTitle = title.length;
-  const userName = name[0].toUpperCase() + name.substring(1);
 
   return (
     <Link to={`/post/${$id}`}>
@@ -32,7 +31,7 @@ function PostCard(
         {lengthOfTitle > 22 ? <h2 className="text-xl font-bold first-letter:uppercase mb-2">{titleIsGreaterThan50Char}...</h2> : <h2 className="text-xl font-bold first-letter:uppercase mb-2">{title}</h2>}
         </div>
         <div className="mb-2">
-          <p>{userName}</p>
+          <p>{name}</p>
         </div>
         <div>
           <p className="text-[1rem] mb-5">{completeDate}</p>
